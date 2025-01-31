@@ -17,10 +17,17 @@ export class WorkoutChartComponent implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.renderChart();
+    // Ensure chartCanvas is available before rendering the chart
+    if (this.chartCanvas) {
+      this.renderChart();
+    }
   }
 
   renderChart() {
+    if (!this.chartCanvas || !this.chartCanvas.nativeElement) {
+      return; // ✅ Avoid error if canvas is not yet available
+    }
+
     if (this.chart) {
       this.chart.destroy();
     }

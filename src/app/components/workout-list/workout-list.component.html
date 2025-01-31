@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <!-- 🔵 Workout Table -->
+        <!-- 🔵 Workout Table with Pagination -->
         <div class="bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-lg font-semibold mb-4">📊 Workout Records</h3>
             <div class="overflow-x-auto">
@@ -38,7 +38,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let workout of workouts; let i = index" [class.bg-gray-100]="i % 2 === 0"
+                        <tr *ngFor="let workout of paginatedWorkouts; let i = index" [class.bg-gray-100]="i % 2 === 0"
                             class="transition-all duration-300 hover:bg-blue-200 text-lg">
                             <td class="p-4 border">{{ workout.userName }}</td>
                             <td class="p-4 border">{{ workout.workoutType }}</td>
@@ -46,6 +46,21 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+
+            <!-- Pagination Controls -->
+            <div class="flex justify-between items-center mt-4">
+                <button (click)="prevPage()" [disabled]="currentPage === 1"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-lg text-lg shadow-md hover:bg-blue-600 transition-all duration-300">
+                    ⬅️ Prev
+                </button>
+
+                <span class="text-lg">Page {{ currentPage }} of {{ totalPages }}</span>
+
+                <button (click)="nextPage()" [disabled]="currentPage === totalPages"
+                    class="bg-blue-500 text-white px-4 py-2 rounded-lg text-lg shadow-md hover:bg-blue-600 transition-all duration-300">
+                    Next ➡️
+                </button>
             </div>
         </div>
 

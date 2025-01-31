@@ -18,6 +18,12 @@ export class WorkoutListComponent implements OnInit {
   userWorkouts: WorkoutEntry[] = [];
   uniqueUsers: string[] = [];
 
+  // 🔵 Pagination Variables
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalPages: number = 1;
+  paginatedWorkouts: WorkoutEntry[] = [];
+
   constructor(private workoutService: WorkoutService) {}
 
   ngOnInit() {
@@ -26,31 +32,58 @@ export class WorkoutListComponent implements OnInit {
 
   onSearchChange(event: Event) {
     this.search = (event.target as HTMLInputElement).value;
+    this.currentPage = 1; // Reset to first page on search
     this.loadWorkouts();
   }
 
   onFilterChange(event: Event) {
     this.filterType = (event.target as HTMLSelectElement).value;
+    this.currentPage = 1; // Reset to first page on filter change
     this.loadWorkouts();
   }
 
   loadWorkouts() {
-    this.workouts = this.workoutService.getWorkoutEntries();
+    let filteredWorkouts = this.workoutService.getWorkoutEntries();
 
     if (this.search) {
-      this.workouts = this.workouts.filter(workout =>
+      filteredWorkouts = filteredWorkouts.filter(workout =>
         workout.userName.toLowerCase().includes(this.search.toLowerCase())
       );
     }
 
     if (this.filterType) {
-      this.workouts = this.workouts.filter(workout =>
+      filteredWorkouts = filteredWorkouts.filter(workout =>
         workout.workoutType.toLowerCase() === this.filterType.toLowerCase()
       );
     }
 
     // ✅ Get unique user names for dropdown selection
-    this.uniqueUsers = [...new Set(this.workouts.map(workout => workout.userName))];
+    this.uniqueUsers = [...new Set(filteredWorkouts.map(workout => workout.userName))];
+
+    // ✅ Update pagination
+    this.workouts = filteredWorkouts;
+    this.totalPages = Math.ceil(this.workouts.length / this.itemsPerPage);
+    this.updatePaginatedWorkouts();
+  }
+
+  // 🔵 Pagination Methods
+  updatePaginatedWorkouts() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    this.paginatedWorkouts = this.workouts.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePaginatedWorkouts();
+    }
+  }
+
+  prevPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedWorkouts();
+    }
   }
 
   selectUser(event: Event) {
