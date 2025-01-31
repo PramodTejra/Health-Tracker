@@ -110,8 +110,11 @@ Ensure that the test coverage is **100%** for both components and services.
 Here are some screenshots of the app:
 
 - **Workout Entry Screen**: The screen where users can add their workout information.
+  ![image](https://github.com/user-attachments/assets/91b9eb57-bbfe-4309-b04b-5d1e08e4839d)
+
 - **Workout List Screen**: Displays the user workout list with search and filter options.
+ ![image](https://github.com/user-attachments/assets/895e10ed-9344-4efc-b04b-1b078b7504a6)
 
-## License
+- **User Progress Screen**: Displays a selected user's workout progress with a visual chart representation.
+  ![image](https://github.com/user-attachments/assets/077e9584-1bf2-404b-a2b2-efb9e9c978f6)
 
-This project is licensed under the **MIT License**.
