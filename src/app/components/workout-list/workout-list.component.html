@@ -1,0 +1,79 @@
+<div class="flex items-center justify-center p-6">
+    <div class="w-full max-w-6xl bg-white bg-opacity-90 p-8 rounded-2xl shadow-xl backdrop-blur-md">
+        <h2 class="text-3xl font-bold text-center text-gray-700 mb-6">📋 Workout List</h2>
+
+        <!-- 🟢 Search & Filter -->
+        <div class="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
+            <h3 class="text-lg font-semibold mb-2">🔍 Search & Filter</h3>
+            <div class="flex flex-col md:flex-row gap-6">
+                <div class="relative flex-1">
+                    <input type="text" [value]="search" (input)="onSearchChange($event)" placeholder="Search by Name"
+                        class="p-3 w-full border rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm">
+                    <span class="absolute right-3 top-3 text-gray-400">🔎</span>
+                </div>
+                <div class="relative flex-1">
+                    <select [value]="filterType" (change)="onFilterChange($event)"
+                        class="p-3 w-full border rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm">
+                        <option value="">All Workouts</option>
+                        <option value="Running">🏃 Running</option>
+                        <option value="Yoga">🧘 Yoga</option>
+                        <option value="Swimming">🏊 Swimming</option>
+                        <option value="Cycling">🚴 Cycling</option>
+                    </select>
+                    <span class="absolute right-3 top-3 text-gray-400">⬇️</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔵 Workout Table -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h3 class="text-lg font-semibold mb-4">📊 Workout Records</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse border mt-2">
+                    <thead>
+                        <tr class="bg-gray-300 text-lg">
+                            <th class="p-4 border">👤 Name</th>
+                            <th class="p-4 border">🏋️ Type</th>
+                            <th class="p-4 border">⏳ Minutes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let workout of workouts; let i = index" [class.bg-gray-100]="i % 2 === 0"
+                            class="transition-all duration-300 hover:bg-blue-200 text-lg">
+                            <td class="p-4 border">{{ workout.userName }}</td>
+                            <td class="p-4 border">{{ workout.workoutType }}</td>
+                            <td class="p-4 border">{{ workout.workoutMinutes }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 📈 User Selection for Progress -->
+        <div class="bg-gray-100 p-6 rounded-lg shadow-md mt-6">
+            <h3 class="text-lg font-semibold mb-2">📊 Select a User to View Progress</h3>
+
+            <!-- User Dropdown -->
+            <div class="flex gap-4">
+                <select [value]="selectedUser" (change)="selectUser($event)"
+                    class="p-3 w-full border rounded-lg text-lg focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm">
+                    <option value="">Select a User</option>
+                    <option *ngFor="let user of uniqueUsers" [value]="user">{{ user }}</option>
+                </select>
+
+                <button (click)="clearSelection()"
+                    class="bg-red-500 text-white p-3 rounded-lg text-lg shadow-md hover:bg-red-600 transition-all duration-300">
+                    ❌ Clear
+                </button>
+            </div>
+
+            <!-- Chart Section -->
+            <app-workout-chart *ngIf="selectedUser" [userWorkouts]="userWorkouts"></app-workout-chart>
+
+            <!-- No Data Message -->
+            <p *ngIf="selectedUser && userWorkouts.length === 0" class="text-center text-gray-600 mt-4">
+                ❌ No workouts found for <strong>{{ selectedUser }}</strong>.
+            </p>
+        </div>
+    </div>
+</div>
