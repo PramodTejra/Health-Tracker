@@ -1,59 +1,117 @@
-# HealthChallengeTracker
+# Health Challenge Tracker
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
+This project is an Angular-based single-page application (SPA) for tracking user workouts, including user name, workout type, and workout minutes. The app allows users to add their workout details, search, filter, and paginate through the workout list. Additionally, it includes an optional feature for displaying workout progress using charts.
 
-## Development server
+## Features
+- Add a user with name, workout type, and workout minutes.
+- Display users' workouts in a table format.
+- Search users by name.
+- Filter users by workout type.
+- Pagination for listing users.
+- Optionally, display workout progress using charts (using `ngx-charts` or `chart.js`).
 
-To start a local development server, run:
+## Table of Contents
+- [Installation](#installation)
+- [Running Locally](#running-locally)
+- [Project Structure](#project-structure)
+- [Technologies Used](#technologies-used)
+- [Unit Tests](#unit-tests)
+- [Screenshots](#screenshots)
 
-```bash
-ng serve
-```
+## Installation
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Follow these steps to get the **Health Challenge Tracker** running on your local machine.
 
-## Code scaffolding
+### 1. Clone the Repository
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+Clone the repository to your local machine:
 
 ```bash
-ng build
+git clone https://github.com/PramodTejra/Health-Tracker.git
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### 2. Install Dependencies
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Navigate into the project folder and install the required dependencies using npm:
 
 ```bash
-ng test
+cd Health-Tracker
+npm install
 ```
 
-## Running end-to-end tests
+## Running Locally
 
-For end-to-end (e2e) testing, run:
+Once the dependencies are installed, you can run the application locally.
+
+### 1. Run the Development Server
+
+Start the Angular development server with the following command:
 
 ```bash
-ng e2e
+npm start
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+The application will be accessible at **[http://localhost:4200](http://localhost:4200)**.
 
-## Additional Resources
+### 2. Run Server-Side Rendering (SSR)
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+For Server-Side Rendering (SSR) support, use this command:
+
+```bash
+npm run serve:ssr:health-challenge-tracker
+```
+
+You can access the SSR version of the app at **[http://localhost:4000](http://localhost:4000)**.
+
+## Project Structure
+
+Here is an overview of the main directories in the project:
+
+```plaintext
+Health-Tracker/
+├── src/
+│   ├── app/
+│   │   ├── components/      # Reusable UI components
+│   │   ├── services/        # Angular services
+│   │   ├── app.module.ts    # Angular module
+│   │   └── app.component.ts # Root component
+├── node_modules/            # Project dependencies
+├── package.json             # NPM configuration and dependencies
+├── angular.json             # Angular CLI configuration
+└── README.md                # Project documentation
+```
+
+## Technologies Used
+
+- **Angular 14+**: For building the application frontend.
+- **ngx-charts & chart.js**: For rendering interactive and responsive charts.
+- **PrimeNG**: UI component library for Angular.
+- **TailwindCSS**: Utility-first CSS framework for styling.
+- **TypeScript**: For writing strongly typed JavaScript code.
+- **Node.js**: For backend/server-side rendering.
+
+## Unit Tests
+
+This project contains unit tests for the following components:
+
+- **Component Tests**: Tests for the user workout list component.
+- **Service Tests**: Tests for the service managing user data.
+
+To run unit tests and generate a code coverage report, use the following command:
+
+```bash
+ng test --code-coverage
+```
+
+Ensure that the test coverage is **100%** for both components and services.
+
+## Screenshots
+
+Here are some screenshots of the app:
+
+- **Workout Entry Screen**: The screen where users can add their workout information.
+- **Workout List Screen**: Displays the user workout list with search and filter options.
+
+## License
+
+This project is licensed under the **MIT License**.
