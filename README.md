@@ -1,5 +1,7 @@
 # Health Challenge Tracker
 
+## Live Demo **[Here](https://health-tracker-4asjs8oaw-pramodtejras-projects.vercel.app/).**
+
 This project is an Angular-based single-page application (SPA) for tracking user workouts, including user name, workout type, and workout minutes. The app allows users to add their workout details, search, filter, and paginate through the workout list. Additionally, it includes an optional feature for displaying workout progress using charts.
 
 ## Features
@@ -104,6 +106,8 @@ ng test --code-coverage
 ```
 
 Ensure that the test coverage is **100%** for both components and services.
+
+
 
 ## Screenshots
 
